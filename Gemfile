@@ -2,6 +2,7 @@
 source "http://rubygems.org"
 
 # Add Gems below:
+gem "rake", "0.9.6"
 
 
 
