@@ -14,5 +14,5 @@
 require "data_grabber/version"
 
 module DataGrabber
-  # Your code goes here...
+  DATA_INCOMING_PATH = File.dirname(__FILE__) + "/../data/incoming"
 end
