@@ -15,4 +15,16 @@ require "data_grabber/version"
 
 module DataGrabber
   DATA_INCOMING_PATH = File.dirname(__FILE__) + "/../data/incoming"
+
+  class SimpleCSVReader
+
+    def initialize(file)
+      @file=DATA_INCOMING_PATH + "/#{file}"
+    end
+
+    def read
+      puts "Going to read CSV file #{@file}\n"
+    end
+  end
+
 end
