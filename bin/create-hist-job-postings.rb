@@ -15,3 +15,7 @@
 $:.unshift File.expand_path("../../lib", __FILE__)
 
 require 'data_grabber'
+
+csv = DataGrabber::SimpleCSVReader.new("test.csv")
+
+csv.read
