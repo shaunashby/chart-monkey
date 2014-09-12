@@ -1,4 +1,5 @@
-data/incoming/*.csv
+data/incoming/*.*
+*.out
 *~
 .*~
 *.gem
