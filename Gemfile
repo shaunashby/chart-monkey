@@ -4,6 +4,8 @@ source "http://rubygems.org"
 # Add Gems below:
 gem "rake", "0.9.6"
 
+# For parsing emails to get input data:
+gem "mail", "2.6.1"
 
 
 #################################################################
