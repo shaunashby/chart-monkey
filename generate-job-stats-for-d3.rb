@@ -16,8 +16,18 @@ $:.unshift File.expand_path("../lib", __FILE__)
 
 require 'data_grabber'
 
-  subj = mail.subject
-  date = mail.date
+# Input file coming from activity log:
+input = "jobs.mbox"
+# Create a parser and parse the input mbox file:
+mbx = DataGrabber::SimpleEmailParser.new(input)
+mbx.parse
+# Loop over messages, extract subject then match to
+# extract number of posts and a search filter (if one
+# was applied to get the results):
+mbx.messages.each do |msg|
+
+  subj = msg.subject
+  date = msg.date
 
   if m = /^[jJ]ob.*?- (\d+).+criteria\.$/.match(subj)
     printf("M1:%d\n", m[1]) if $DEBUG
@@ -34,28 +44,5 @@ require 'data_grabber'
   else
     printf("unmatched: %s\n", subj) if $DEBUG
   end
-end
 
-# Input file coming from activity log:
-input = File.dirname(__FILE__) + "/data/incoming/jobs.mbox"
-messages=[]
-msg = nil
-
-# Open and split into individual mails, extract subject then match to
-# extract number of posts and a search filter (if one was applied to
-# get the results):
-File.open(input,'r') do |f|
-  while (line = f.gets)
-    begin
-      if (line.match(/\AFrom /))
-        get_data_from_msg(msg) if (msg)
-        msg = ''
-      else
-        msg << line.sub(/^\>From/, 'From')
-      end
-    rescue => err
-      puts "###### ===> XX#{line}XX"  if $DEBUG
-      puts "Error: #{err}...." if $DEBUG
-    end
-  end
 end
