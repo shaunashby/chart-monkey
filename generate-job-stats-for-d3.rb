@@ -12,10 +12,9 @@
 #
 #
 #--------------------------------------------------------------------
-require 'mail'
+$:.unshift File.expand_path("../lib", __FILE__)
 
-def get_data_from_msg(msg)
-  mail = Mail.new(msg)
+require 'data_grabber'
 
   subj = mail.subject
   date = mail.date
