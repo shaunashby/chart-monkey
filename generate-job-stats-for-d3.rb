@@ -24,6 +24,7 @@ mbx.parse
 # Loop over messages, extract subject then match to
 # extract number of posts and a search filter (if one
 # was applied to get the results):
+skipped = 0
 mbx.messages.each do |msg|
 
   subj = msg.subject
@@ -43,6 +44,9 @@ mbx.messages.each do |msg|
     printf("%s,%d,%s\n", date, m[1], m[2])
   else
     printf("unmatched: %s\n", subj) if $DEBUG
+    skipped += 1
   end
 
 end
+
+puts "Parsed #{mbx.messages.length} messages (skipped #{skipped})." if $DEBUG
