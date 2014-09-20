@@ -1,4 +1,5 @@
 data/incoming/*.*
+data/outgoing/*.csv
 *.out
 *~
 .*~
