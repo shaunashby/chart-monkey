@@ -32,16 +32,16 @@ mbx.messages.each do |msg|
 
   if m = /^[jJ]ob.*?- (\d+).+criteria\.$/.match(subj)
     printf("M1:%d\n", m[1]) if $DEBUG
-    printf("%s,%d\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1])
+    printf("\"%s\",\"%d\"\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1])
   elsif m = /(\d+) .*JobMailer \"(.*?)\"\./.match(subj)
     printf("M2: %d  %s\n", m[1], m[2]) if $DEBUG
-    printf("%s,%d,%s\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1], m[2])
+    printf("\"%s\",\"%d\",\"%s\"\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1], m[2])
   elsif m = /(\d+) .*JobMailer \'(.*?)\'\./.match(subj)
     printf("M3: %d  %s\n", m[1], m[2]) if $DEBUG
-    printf("%s,%d,%s\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1], m[2])
+    printf("\"%s\",\"%d\",\"%s\"\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1], m[2])
   elsif m = /(\d+) .*search \"(.*?)\"\.?/.match(subj)
     printf("M4: %d  %s\n", m[1], m[2]) if $DEBUG
-    printf("%s,%d,%s\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1], m[2])
+    printf("\"%s\",\"%d\",\"%s\"\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1], m[2])
   else
     printf("unmatched: %s\n", subj) if $DEBUG
     skipped += 1
