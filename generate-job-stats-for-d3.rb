@@ -72,3 +72,7 @@ mbx.messages.each do |msg|
 end
 
 puts "Parsed #{mbx.messages.length} messages (skipped #{skipped})." if $DEBUG
+
+collections.keys.each do |k|
+  puts "Collection #{k} has #{collections[k].length} entries."
+end
