@@ -7,6 +7,9 @@ gem "rake", "0.9.6"
 # For parsing emails to get input data:
 gem "mail", "2.6.1"
 
+# Testing utils:
+gem "rspec","3.1.0"
+
 
 #################################################################
 # Creating a new project:                                       #
