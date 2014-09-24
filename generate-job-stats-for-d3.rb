@@ -16,6 +16,8 @@ $:.unshift File.expand_path("../lib", __FILE__)
 
 require 'data_grabber'
 
+collections=Hash::new()
+
 # Input file coming from activity log:
 input = "jobs.mbox"
 # Create a parser and parse the input mbox file:
@@ -31,17 +33,37 @@ mbx.messages.each do |msg|
   date = msg.date
 
   if m = /^[jJ]ob.*?- (\d+).+criteria\.$/.match(subj)
-    printf("M1:%d\n", m[1]) if $DEBUG
-    printf("\"%s\",\"%d\"\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1])
+    printf("M1: \"%s\",\"%d\"\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1]) if $DEBUG
+
+    if !collections.has_key?("M1")
+      collections["M1"] = Array::new()
+    end
+
+    collections["M1"] << sprintf("\"%s\",\"%d\"\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1])
   elsif m = /(\d+) .*JobMailer \"(.*?)\"\./.match(subj)
-    printf("M2: %d  %s\n", m[1], m[2]) if $DEBUG
-    printf("\"%s\",\"%d\",\"%s\"\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1], m[2])
+    printf("\"%s\",\"%d\",\"%s\"\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1], m[2]) if $DEBUG
+
+    if !collections.has_key?("M2")
+      collections["M2"] = Array::new()
+    end
+
+    collections["M2"] << sprintf("\"%s\",\"%d\",\"%s\"\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1], m[2])
   elsif m = /(\d+) .*JobMailer \'(.*?)\'\./.match(subj)
-    printf("M3: %d  %s\n", m[1], m[2]) if $DEBUG
-    printf("\"%s\",\"%d\",\"%s\"\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1], m[2])
+    printf("\"%s\",\"%d\",\"%s\"\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1], m[2]) if $DEBUG
+
+    if !collections.has_key?("M3")
+      collections["M3"] = Array::new()
+    end
+
+    collections["M3"] << sprintf("\"%s\",\"%d\",\"%s\"\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1], m[2])
   elsif m = /(\d+) .*search \"(.*?)\"\.?/.match(subj)
-    printf("M4: %d  %s\n", m[1], m[2]) if $DEBUG
-    printf("\"%s\",\"%d\",\"%s\"\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1], m[2])
+    printf("\"%s\",\"%d\",\"%s\"\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1], m[2]) if $DEBUG
+
+    if !collections.has_key?("M4")
+      collections["M4"] = Array::new()
+    end
+
+    collections["M4"] << sprintf("\"%s\",\"%d\",\"%s\"\n", date.strftime("%d/%m/%y %H:%M:%S"), m[1], m[2])
   else
     printf("unmatched: %s\n", subj) if $DEBUG
     skipped += 1
