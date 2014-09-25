@@ -16,8 +16,8 @@ require "data_grabber"
 
 describe DataGrabber do
 
-  it "should instantiate with mbox file argument" do
-    expect(DataGrabber::SimpleEmailParser.new("jobs.mbox")).to be_an_instance_of(DataGrabber::SimpleEmailParser)
+  it "should have the version 0.0.1" do
+    expect(DataGrabber::VERSION).to eq("0.0.1")
   end
 
 end
